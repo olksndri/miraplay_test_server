@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "lint": "eslint **/*.js",
+    "lint:fix": "eslint --fix **/*.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,15 +19,18 @@
     "joi": "^17.11.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.0",
-    "nodemon": "^3.0.1",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1"
   },
   "devDependencies": {
     "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-n": "^16.3.1",
-    "eslint-plugin-promise": "^6.1.1"
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.1.0"
   }
 }

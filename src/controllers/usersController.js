@@ -1,13 +1,13 @@
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
-const { User } = require("../service/index");
-const { ctrlDecorator } = require("../decorators/index");
+const { User } = require('../service/index');
+const { ctrlDecorator } = require('../decorators/index');
 const {
   setPassword,
   validatePassword,
   HttpError,
-} = require("../utilities/index");
+} = require('../utilities/index');
 
 const { JWT_SECRET } = process.env;
 
@@ -17,7 +17,7 @@ const signUp = async (req, res, next) => {
   const isEmailExists = await User.findOne({ email });
 
   if (isEmailExists) {
-    return next(HttpError(400, "User with such email already exists"));
+    return next(HttpError(400, 'User with such email already exists'));
   }
 
   const encryptedPassword = setPassword(password);
@@ -28,7 +28,7 @@ const signUp = async (req, res, next) => {
   });
 
   const token = jwt.sign({ _id }, JWT_SECRET, {
-    expiresIn: "1h",
+    expiresIn: '1h',
   });
 
   await User.findByIdAndUpdate(_id, { token });
@@ -40,17 +40,17 @@ const signIn = async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    return next(HttpError(403, "Email or password is wrong"));
+    return next(HttpError(403, 'Email or password is wrong'));
   }
 
   if (!validatePassword(req.body.password, user.password)) {
-    return next(HttpError(403, "Email or password is wrong"));
+    return next(HttpError(403, 'Email or password is wrong'));
   }
 
   const { _id, email, createdAt, updatedAt } = user;
 
   const token = jwt.sign({ _id }, JWT_SECRET, {
-    expiresIn: "1h",
+    expiresIn: '1h',
   });
   await User.findOneAndUpdate({ email }, { token });
 
