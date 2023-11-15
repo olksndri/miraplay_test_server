@@ -1,5 +1,6 @@
 {
   "verbose": true,
   "watch": "*.js",
-  "ext": ".js"
+  "ext": ".js",
+  "exec": "server.js"
 }

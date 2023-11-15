@@ -2,11 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
 
+const { authRouter } = require("./src/routes/index");
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(passport.initialize());
+
+app.use("/auth", authRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
