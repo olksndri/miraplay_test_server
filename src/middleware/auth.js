@@ -1,6 +1,7 @@
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const passport = require("passport");
+require("dotenv").config();
 
 const { HttpError } = require("../utilities/index");
 const { User } = require("../service/index");
@@ -15,7 +16,7 @@ const opts = {
 passport.use(
   new JwtStrategy(opts, async (jwtPayload, done) => {
     try {
-      const user = await User.findById(jwtPayload.id);
+      const user = await User.findById(jwtPayload._id);
       if (user) {
         return done(null, user);
       } else {
