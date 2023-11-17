@@ -28,7 +28,7 @@ const signUp = async (req, res, next) => {
   });
 
   const token = jwt.sign({ _id }, JWT_SECRET, {
-    expiresIn: '1h',
+    expiresIn: '23h',
   });
 
   await User.findByIdAndUpdate(_id, { token });
@@ -50,7 +50,7 @@ const signIn = async (req, res, next) => {
   const { _id, email, createdAt, updatedAt } = user;
 
   const token = jwt.sign({ _id }, JWT_SECRET, {
-    expiresIn: '1h',
+    expiresIn: '23h',
   });
   await User.findOneAndUpdate({ email }, { token });
 
